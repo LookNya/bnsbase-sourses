@@ -1,0 +1,115 @@
+{{## def.title:Иконки скиллов — служебная #}}
+<style>
+#container{
+	width: 80%;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 60px 0px;
+}
+#container>div{
+	float: left;
+	margin: 20px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid lightgrey;
+	width: 254px;
+	background: white;
+}
+#container>div>img{
+	border-radius: 3px;
+	float: left;
+}
+.name{
+	float: left;
+	height: 64px;
+	margin-left: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 163px;
+	overflow: hidden;
+	line-height: 43px;
+}
+.link{
+	float: left;
+	padding-top: 10px;
+}
+</style>
+
+<script>
+var db = [[[],[]],[[],[]],[[],[]],[[],[]],[[],[]],[[],[]],[[],[]]]
+</script>
+<script src="/static/js/calc/db/skillsdata_a.js"></script>
+<script src="/static/js/calc/db/skillslist_a.js"></script>
+<script>
+db[0][0] = skills_data
+db[0][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_f.js"></script>
+<script src="/static/js/calc/db/skillslist_f.js"></script>
+<script>
+db[1][0] = skills_data
+db[1][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_k.js"></script>
+<script src="/static/js/calc/db/skillslist_k.js"></script>
+<script>
+db[2][0] = skills_data
+db[2][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_d.js"></script>
+<script src="/static/js/calc/db/skillslist_d.js"></script>
+<script>
+db[3][0] = skills_data
+db[3][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_b.js"></script>
+<script src="/static/js/calc/db/skillslist_b.js"></script>
+<script>
+db[4][0] = skills_data
+db[4][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_l.js"></script>
+<script src="/static/js/calc/db/skillslist_l.js"></script>
+<script>
+db[5][0] = skills_data
+db[5][1] = skills_list
+</script>
+<script src="/static/js/calc/db/skillsdata_s.js"></script>
+<script src="/static/js/calc/db/skillslist_s.js"></script>
+<script>
+db[6][0] = skills_data
+db[6][1] = skills_list
+</script>
+<div id="container"></div>
+<script>
+var imgs = []
+var inames = []
+var ic = 0
+for(var i=0; i<db.length; i++){
+	var Sdata = db[i][0]
+	var Ldata = db[i][1]
+	var Skeys = Object.keys(Sdata)
+	var Lkeys = Object.keys(Ldata)
+	for(var j=0; j<Lkeys.length; j++){
+		var skill = Ldata[Lkeys[j]]
+		if(skill.tree){
+			var skillTree = skill.tree
+			for(var z=0; z< Skeys.length; z++){
+				if(Skeys[z].indexOf(skillTree+'|root')+1){
+					imgs[ic]=Sdata[Skeys[z]].img
+					inames[ic]=skill.name
+					ic++
+				}
+			}
+		}
+	}
+}
+for(var i=0; i<imgs.length; i++){
+	container.innerHTML+=template(inames[i],imgs[i])
+}
+function template(name, img){
+	return '<div><img src='+img+'><div class="name">'+name+'</div>'+
+	'<div class="link"><a href="http://bnsbase.com'+img+'">bnsbase.com'+img+
+	'</a></div></div>'
+}
+</script>
